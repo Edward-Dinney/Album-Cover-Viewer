@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+import "./App.css";
+import logo from './components/logo.png';
 
 const SpotifyAlbums = () => {
     const [searchInput, setSearchInput] = useState("");
@@ -38,9 +39,7 @@ const SpotifyAlbums = () => {
                 console.log(data);
                 setAlbums(data.items);
             });
-    }
-
-    
+    }    
     const handleChange = (e) => {
         e.preventDefault();
         setSearchInput(e.target.value);
@@ -51,23 +50,25 @@ const SpotifyAlbums = () => {
       }
     console.log(albums)
     return (
-        <div>
-            <h1>Albums Covers</h1>
+        <center>
+    <div className="bg">
+    <img src={logo} alt="Logo" className="logo" onClick={() => window.location.reload()}/>
+        <form onSubmit={handleSubmit}>
+            <input type="text" placeholder="search artists" value={searchInput} onChange={handleChange} />
             
-            <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Search Artists" value={searchInput} onChange={handleChange} />
-            <button type="submit">Search</button>
-            </form>
-            <ul>
-    {albums.map(album => (
-        <li key={album.id}>
-            {album.name}
-            <img src={album.images[0].url} alt={album.name}/>
-        </li>
-    ))}
-</ul>
+        </form>
+
+        <div className="albums-grid">
+            {albums.map(album => (
+                <div key={album.id} className="album-card">
+                    <img src={album.images[0].url} alt={album.name} className="album-image"/>
+                    <div className="album-name">{album.name}</div>
+                </div>
+            ))}
         </div>
-    );
+    </div>
+</center>
+);
 };
 
 export default SpotifyAlbums;
