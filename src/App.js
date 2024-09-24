@@ -33,7 +33,7 @@ const SpotifyAlbums = () => {
             .then(data => {return data.artists.items[0].id})
         console.log("art:" + artistID);
 
-        var albums = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album&market=US&limit+50', searchParameters)
+        var albums = await fetch('https://api.spotify.com/v1/artists/' + artistID + '/albums' + '?include_groups=album&market=US&limit+100', searchParameters)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
@@ -54,7 +54,7 @@ const SpotifyAlbums = () => {
     <div className="bg">
     <img src={logo} alt="Logo" className="logo" onClick={() => window.location.reload()}/>
         <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="search artists" value={searchInput} onChange={handleChange} />
+            <input type="text" placeholder="search music artists" value={searchInput} onChange={handleChange} />
             
         </form>
 
